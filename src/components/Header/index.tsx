@@ -1,9 +1,11 @@
 import { Text, View } from "react-native";
-import { Container } from "./styles";
+import logoImg from '../../../assets/nubank_logo.png';
+
+import { Container, Logo } from "./styles";
 export function Header() {
   return (
     <Container>
-      <Text>Header</Text>
+      <Logo source={logoImg} />
     </Container>
   )
 }
