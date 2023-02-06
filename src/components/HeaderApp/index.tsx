@@ -10,7 +10,7 @@ export function HeaderApp () {
       <View>
       <ButtonEye style={{ opacity: 0.9 }}>
           <Feather
-            name="user"
+            name="log-out"
             size={36}
             color="#fff"
           />

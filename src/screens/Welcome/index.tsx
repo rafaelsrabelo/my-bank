@@ -1,19 +1,22 @@
-import { Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { BackgroundImage, Container, Title } from "./styles";
+import background from './../../../assets/background.png';
 import { Button } from "../../components/Button";
-import { Header } from "../../components/Header";
-import { Input } from "../../components/Input";
-import { Container, Title, HightLight , Subtitle} from "./styles";
-
 export function Welcome() {
+  const navigation = useNavigation();
+
+  function handleWelcome() {
+    navigation.navigate('welcome')
+  }
+
   return (
     <Container>
-      <Header />
-      <HightLight>
-        <Title>Bem vindo ao MyBank!</Title>
-        <Subtitle>Tenha o controle da sua vida financeira na palma da sua mão!</Subtitle>
-        <Input style={{ marginTop: 50, marginBottom: 20 }} placeholder="Qual seu nome?" />
-        <Button title="Adicionar"/>
-      </HightLight>
+      <BackgroundImage source={background} />
+      <Title>Tenha o controle das suas finanças</Title>
+      <Button
+        title="Acessar"
+        onPress={handleWelcome}
+      />
     </Container>
   )
 }

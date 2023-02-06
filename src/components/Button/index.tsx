@@ -12,7 +12,7 @@ export function Button({ title, type = 'PRIMARY', ...rest}: Props) {
     <Container
       type={type}
       {...rest}>
-      <Title>
+      <Title style={{color: type === 'PRIMARY' ? '#fff' : '#771ac9' }}>
         {title}
       </Title>
     </Container>

@@ -52,7 +52,12 @@ export function LastMoney() {
               )
             }
             </Content>
-        </ButtonCard>}
+          </ButtonCard>}
+        ListEmptyComponent={() => (
+          <Text style={{ textAlign: 'center', marginTop: 50, fontSize: 18}}>
+            Não há movimentação!
+          </Text>
+        )}
       />
     </Container>
   )
