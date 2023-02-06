@@ -6,7 +6,7 @@ export type Props = {
 }
 
 export const Container = styled(TouchableOpacity)`
-/* flex: 1; */
+flex: 1;
 padding: 0 20px;
 `
 
@@ -55,4 +55,17 @@ export const Hidden = styled.Text`
   height: 10px;
   background-color: ${({ theme }) => theme.COLORS.GRAY_300};
   border-radius: 8px;
+`
+export const HeaderContent = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`
+
+export const ButtonEye = styled(TouchableOpacity)`
+  width: 36;
+  height: 36;
+  background-color: rgba(255,255,255,0.5);
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
 `

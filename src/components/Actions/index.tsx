@@ -1,6 +1,5 @@
 import { ActionButton, AreaButton, Container, Title } from "./styles";
-import { Text, ScrollView } from 'react-native'
-import { AntDesign} from '@expo/vector-icons'
+import { AntDesign} from '@expo/vector-icons/'
 
 export function Actions() {
   return (

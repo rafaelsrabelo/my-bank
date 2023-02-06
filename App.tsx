@@ -1,11 +1,9 @@
 import { ThemeProvider } from 'styled-components'
 import { useFonts, Roboto_400Regular, Roboto_700Bold} from '@expo-google-fonts/roboto'
-import {Welcome} from './src/screens/Welcome'
 import theme from './src/theme';
-import { ActivityIndicator, StatusBar } from 'react-native';
+import { StatusBar } from 'react-native';
 import { Loading } from './src/components/Loading';
-import { Home } from './src/screens/Home';
-import { Initial } from './src/screens/Initial';
+import { Routes } from './src/routes';
 
 export default function App() {
   const [fontsLoaded] = useFonts({Roboto_400Regular, Roboto_700Bold})
@@ -17,7 +15,7 @@ export default function App() {
         translucent
       />
       {
-        fontsLoaded ?  <Welcome /> : <Loading />
+        fontsLoaded ?  <Routes/> : <Loading />
       }
     </ThemeProvider>
   );
