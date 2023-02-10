@@ -45,7 +45,7 @@ export function AppRoutes() {
         component={Pix}
         options={{
           tabBarIcon: ({color, size, focused}) => (
-            <Feather name='clock' size={size} color={focused ? '#771AC9' : '#c3c3c3'} />
+            <Feather name='dollar-sign' size={size} color={focused ? '#771AC9' : '#c3c3c3'} />
           )
         }}
       />
