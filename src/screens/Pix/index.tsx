@@ -1,4 +1,5 @@
 import { View, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { Categorie, Container, TitleForm} from "./styles";
 import { HeaderApp } from "../../components/HeaderApp";
 import { Input } from "../../components/Input";
@@ -15,8 +16,9 @@ type FormProps = {
 }
 
 export function Pix() {
-  const { control, handleSubmit, formState: { errors } } = useForm<FormProps>();
+  const { control, handleSubmit, reset, formState: { errors } } = useForm<FormProps>();
   const [transactionType, setTransactionType] = useState('');
+  const navigation = useNavigation();
 
   function handleCategories(type: 'up' | 'down') {
     setTransactionType(type);
@@ -30,6 +32,8 @@ export function Pix() {
     }
 
     console.log(data);
+    reset();
+    navigation.navigate('home');
   }
 
 
@@ -45,7 +49,7 @@ export function Pix() {
           render={({ field: { onChange, value } }) => (
             <Input
               onChangeText={onChange}
-              value={value}
+              value={value} 
               placeholder="Nome"
               style={{ marginBottom: 20 }} />
           )}
@@ -59,7 +63,7 @@ export function Pix() {
               onChangeText={onChange}
               value={value}
               keyboardType="numeric"
-              placeholder="amount"
+              placeholder="Valor"
               style={{ marginBottom: 20 }} />
           )}
         />

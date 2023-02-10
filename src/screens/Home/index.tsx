@@ -7,7 +7,7 @@ export function Home() {
   return (
     <Container>
       <HeaderApp />
-      <Amount balance="3.300,00" />
+      <Amount balance="0,00" />
       <Actions />
       <LastMoney />
       </Container>
