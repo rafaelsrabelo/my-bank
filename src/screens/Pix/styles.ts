@@ -16,3 +16,9 @@ export const Categorie = styled.View`
   flex-direction: row;
   justify-content: space-between;
 `
+
+export const Error = styled.Text`
+  text-align: center;
+  color: red;
+  margin-bottom: 30px;
+`

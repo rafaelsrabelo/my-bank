@@ -54,7 +54,7 @@ export function AppRoutes() {
         component={Saved}
         options={{
           tabBarIcon: ({color, size, focused}) => (
-            <Feather name='share' size={size} color={focused ? '#771AC9' : '#c3c3c3'} />
+            <Feather name='calendar' size={size} color={focused ? '#771AC9' : '#c3c3c3'} />
           )
         }}
       />

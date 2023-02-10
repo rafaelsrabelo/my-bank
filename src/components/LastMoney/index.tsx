@@ -25,12 +25,20 @@ export function LastMoney() {
     <Container>
       <HeaderContent>
       <Title>Últimas movimentações</Title>
-      <ButtonEye style={{ opacity: 0.9 }}  onPress={showValueFunction}>
-          <Feather
-            name="eye"
-            size={36}
-            color="#000"
-            />
+        <ButtonEye style={{ opacity: 0.9 }} onPress={showValueFunction}>
+          {
+            showValue ?
+              <Feather
+                name="eye"
+                size={36}
+                color="#000"
+              /> :           <Feather
+              name="eye-off"
+              size={36}
+              color="#000"
+              />
+          }
+
         </ButtonEye>
       </HeaderContent>
 

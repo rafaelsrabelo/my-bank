@@ -21,7 +21,7 @@ export function Actions() {
           <AntDesign name="tagso" size={26} color="#000" />
         </AreaButton>
         <Title>
-          Compras
+          Saídas
         </Title>
       </ActionButton>
 
@@ -34,14 +34,14 @@ export function Actions() {
         </Title>
       </ActionButton>
 
-      <ActionButton>
+      {/* <ActionButton>
         <AreaButton>
           <AntDesign name="barcode" size={26} color="#000" />
         </AreaButton>
         <Title>
           Boletos
         </Title>
-      </ActionButton>
+      </ActionButton> */}
 
       <ActionButton>
         <AreaButton>
