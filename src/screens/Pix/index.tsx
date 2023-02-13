@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Categorie, Container, TitleForm} from "./styles";
 import { HeaderApp } from "../../components/HeaderApp";
@@ -8,6 +8,8 @@ import { TransactionTypeButton } from "../../components/TransactionTypeButton";
 import { useState } from "react";
 import { CategorySelect } from "../../components/CategorySelect";
 import { useForm, Controller } from 'react-hook-form';
+import axios from "axios";
+import { api } from "../../services/api";
 
 type FormProps = {
   name: string;
@@ -24,17 +26,35 @@ export function Pix() {
     setTransactionType(type);
   }
 
-  function handleRegister(form: FormProps) {
+  async function createTransaction(form: FormProps) {
     const data = {
       name: form.name,
       amount: form.amount,
-      transactionType
+      type: form.type
     }
 
-    console.log(data);
+    api.post('/transactions', data).then((response) => console.log('deu certo')).catch((err) => console.log('deu errado'))
+
     reset();
     navigation.navigate('home');
   }
+
+  // function createTransaction(form: FormProps) {
+  //   try {
+  //     const data = {
+  //       name: form.name,
+  //       amount: form.amount,
+  //       transactionType
+  //     }
+  //     axios.post('/transactions', {
+  //       data
+  //     });
+  //     console.log(data)
+  //     reset();
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
 
 
   return (
@@ -101,7 +121,7 @@ export function Pix() {
 
         {/* <CategorySelect title="Categoria"/> */}
         
-        <Button title="Cadastrar" onPress={handleSubmit(handleRegister)}/>
+        <Button title="Cadastrar" onPress={handleSubmit(createTransaction)}/>
       </Container>
     </View>
   )

@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 import { FlatList, TouchableOpacity } from "react-native";
 
 export type Props = {
-  type: number;
+  type: string;
 }
 
 export const Container = styled(TouchableOpacity)`
@@ -44,7 +44,7 @@ export const Label = styled.Text`
   font-size: ${({ theme }) => theme.FONT_SIZE.LG}px;
 `
 export const Value = styled.Text<Props>`
-  color: ${({ theme, type }) => type === 0 ? theme.COLORS.GREEN_700 : 'red'};
+  color: ${({ theme, type }) => type === 'up' ? theme.COLORS.GREEN_700 : 'red'};
   font-weight: bold;
   font-size: ${({ theme }) => theme.FONT_SIZE.LG}px;
 `
