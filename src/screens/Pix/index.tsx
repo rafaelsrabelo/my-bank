@@ -19,21 +19,30 @@ type FormProps = {
 
 export function Pix() {
   const { control, handleSubmit, reset, formState: { errors } } = useForm<FormProps>();
-  const [transactionType, setTransactionType] = useState('');
+  const [type, setTransactionType] = useState('');
   const navigation = useNavigation();
 
   function handleCategories(type: 'up' | 'down') {
     setTransactionType(type);
   }
 
+  
+  // let options = {
+  //   headers: {
+  //     'User-Agent': 'xyz-bla-bla'
+  //   }
+  // }
+
   async function createTransaction(form: FormProps) {
     const data = {
       name: form.name,
-      amount: form.amount,
-      type: form.type
+      type: form.type,
+      amount: form.amount
     }
-
-    api.post('/transactions', data).then((response) => console.log('deu certo')).catch((err) => console.log('deu errado'))
+    await api.post('/transactions', {
+      data,
+      // created_at: '123213'
+    }).then((response) => console.log('deu certo')).catch((err) => console.log(err))
 
     reset();
     navigation.navigate('home');
@@ -44,7 +53,7 @@ export function Pix() {
   //     const data = {
   //       name: form.name,
   //       amount: form.amount,
-  //       transactionType
+  //       type
   //     }
   //     axios.post('/transactions', {
   //       data
@@ -99,7 +108,7 @@ export function Pix() {
                 type="up"
                 
                 title="Entrada"
-                isActive={transactionType === 'up'}
+                isActive={type === 'up'}
               />
             )}
 
@@ -113,7 +122,7 @@ export function Pix() {
                 onPress={() => handleCategories('down')}
                 type="down"
                 title="Saída"
-                isActive={transactionType === 'down'}
+                isActive={type === 'down'}
               />
             )}
           />
