@@ -30,7 +30,7 @@ export function Actions() {
           <AntDesign name="creditcard" size={26} color="#000" />
         </AreaButton>
         <Title>
-          Carteira
+          Agendamento
         </Title>
       </ActionButton>
 

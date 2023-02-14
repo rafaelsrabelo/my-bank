@@ -1,4 +1,4 @@
-import { View, Text, Alert } from "react-native";
+import { View, Text, Alert, Modal } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Categorie, Container, TitleForm} from "./styles";
 import { HeaderApp } from "../../components/HeaderApp";
@@ -10,61 +10,53 @@ import { CategorySelect } from "../../components/CategorySelect";
 import { useForm, Controller } from 'react-hook-form';
 import axios from "axios";
 import { api } from "../../services/api";
+import { Select } from "../../components/Select";
+import { TypeSelect } from "../TypeSelect";
 
 type FormProps = {
   name: string;
   amount: string;
-  type: string;
+  created_at: string;
+  transactionType: string;
 }
 
 export function Pix() {
+  const [category, setCategory] = useState({
+    id: 1,
+    name: 'up'
+  });
   const { control, handleSubmit, reset, formState: { errors } } = useForm<FormProps>();
-  const [type, setTransactionType] = useState('');
+  const [transactionType, setTransactionType] = useState('');
+  const [categoryModal, setCategoryModal] = useState(false);
   const navigation = useNavigation();
 
-  function handleCategories(type: 'up' | 'down') {
-    setTransactionType(type);
+  // function handleCategories(type: 'up' | 'down') {
+  //   setTransactionType(type);
+  // }
+
+  function handleCloseSelectType() {
+    setCategoryModal(false)
   }
 
-  
-  // let options = {
-  //   headers: {
-  //     'User-Agent': 'xyz-bla-bla'
-  //   }
-  // }
+  function handleOpenSelectType() {
+    setCategoryModal(true)
+  }
 
   async function createTransaction(form: FormProps) {
     const data = {
       name: form.name,
-      type: form.type,
-      amount: form.amount
+      type: 'up',
+      amount: form.amount,
     }
+    console.log(data);
+    console.log(`${form} + form`)
     await api.post('/transactions', {
       data,
-      // created_at: '123213'
-    }).then((response) => console.log('deu certo')).catch((err) => console.log(err))
+    }).then((response) => console.log('deu certo')).catch((err) => console.log('deu errado' + err.message))
 
     reset();
     navigation.navigate('home');
   }
-
-  // function createTransaction(form: FormProps) {
-  //   try {
-  //     const data = {
-  //       name: form.name,
-  //       amount: form.amount,
-  //       type
-  //     }
-  //     axios.post('/transactions', {
-  //       data
-  //     });
-  //     console.log(data)
-  //     reset();
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
-
 
   return (
     <View>
@@ -96,42 +88,18 @@ export function Pix() {
               style={{ marginBottom: 20 }} />
           )}
         />
-
-        <Categorie style={{ marginBottom: 100 }}>
-          <Controller
-            control={control}
-            name="type"
-            
-            render={({ field: { onChange, value } }) => (
-              <TransactionTypeButton
-                onPress={() => handleCategories('up')}
-                type="up"
-                
-                title="Entrada"
-                isActive={type === 'up'}
-              />
-            )}
-
-          />
-
-          <Controller
-            control={control}
-            name="type"
-            render={({ field: { onChange, value } }) => (
-              <TransactionTypeButton
-                onPress={() => handleCategories('down')}
-                type="down"
-                title="Saída"
-                isActive={type === 'down'}
-              />
-            )}
-          />
-        </Categorie>
-
-        {/* <CategorySelect title="Categoria"/> */}
+        
+        <Select title={category.name} onPress={handleOpenSelectType} />
         
         <Button title="Cadastrar" onPress={handleSubmit(createTransaction)}/>
       </Container>
+      <Modal visible={categoryModal}>
+        <TypeSelect
+          type={category}
+          setCategory={setCategory}
+          closedSelectType={handleCloseSelectType}
+        />
+      </Modal>
     </View>
   )
 }
