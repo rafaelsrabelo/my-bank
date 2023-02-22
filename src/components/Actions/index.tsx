@@ -7,14 +7,14 @@ export function Actions() {
 
   return (
     <Container horizontal={true} showsHorizontalScrollIndicator={false}>
-        <ActionButton>
-          <AreaButton>
-            <AntDesign name="addfolder" size={26} color="#000" />
-          </AreaButton>
-          <Title>
-            Entradas
-          </Title>
-        </ActionButton>
+      <ActionButton>
+        <AreaButton>
+          <AntDesign name="addfolder" size={26} color="#000" />
+        </AreaButton>
+        <Title>
+          Entradas
+        </Title>
+      </ActionButton>
 
       <ActionButton>
         <AreaButton>
@@ -33,15 +33,6 @@ export function Actions() {
           Agendamento
         </Title>
       </ActionButton>
-
-      {/* <ActionButton>
-        <AreaButton>
-          <AntDesign name="barcode" size={26} color="#000" />
-        </AreaButton>
-        <Title>
-          Boletos
-        </Title>
-      </ActionButton> */}
 
       <ActionButton>
         <AreaButton>

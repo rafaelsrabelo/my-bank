@@ -5,7 +5,7 @@ import { HeaderApp } from "../../components/HeaderApp";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { TransactionTypeButton } from "../../components/TransactionTypeButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CategorySelect } from "../../components/CategorySelect";
 import { useForm, Controller } from 'react-hook-form';
 import axios from "axios";
@@ -26,13 +26,8 @@ export function Pix() {
     name: 'up'
   });
   const { control, handleSubmit, reset, formState: { errors } } = useForm<FormProps>();
-  const [transactionType, setTransactionType] = useState('');
   const [categoryModal, setCategoryModal] = useState(false);
   const navigation = useNavigation();
-
-  // function handleCategories(type: 'up' | 'down') {
-  //   setTransactionType(type);
-  // }
 
   function handleCloseSelectType() {
     setCategoryModal(false)
@@ -45,18 +40,20 @@ export function Pix() {
   async function createTransaction(form: FormProps) {
     const data = {
       name: form.name,
-      type: 'up',
+      type: category.name,
       amount: form.amount,
     }
-    console.log(data);
-    console.log(`${form} + form`)
     await api.post('/transactions', {
       data,
-    }).then((response) => console.log('deu certo')).catch((err) => console.log('deu errado' + err.message))
+    }).then((response) => console.log(response)).catch((err) => console.log('deu errado' + err.message))
 
     reset();
     navigation.navigate('home');
   }
+
+  useEffect(() => {
+    // console.log(control)
+  },[])
 
   return (
     <View>
