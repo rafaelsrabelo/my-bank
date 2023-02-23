@@ -18,14 +18,17 @@ export function Login() {
   const navigation = useNavigation();
   const { control, reset, handleSubmit, formState: { errors } } = useForm<FormData>()
   const [isLoading, setIsLoading] = useState(false);
+  
   function newAccount() {
     navigation.navigate('signup')
   }
   
   async function handleLogin({ email, password }: FormData) {
     try {
+      console.log('passou')
       setIsLoading(true);
       await login(email, password);
+      reset()
     } catch (error) {
       console.log(error);
       setIsLoading(false)

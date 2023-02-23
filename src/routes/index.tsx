@@ -8,12 +8,13 @@ import { useAuth } from "../hooks/useAuth";
 export function Routes() {
   const { COLORS } = useTheme()
   const { user } = useAuth();
-  // console.log('usuário logado =>', user);
+  console.log('usuário logado =>', user);
+
   return (
     <View style={{ flex: 1, backgroundColor: COLORS.PURPLE }}>
       <NavigationContainer>
         {
-          user.id ? <AppRoutes /> : <AuthRoutes />
+          user.email ? <AppRoutes /> : <AuthRoutes />
         }
       </NavigationContainer>
     </View>

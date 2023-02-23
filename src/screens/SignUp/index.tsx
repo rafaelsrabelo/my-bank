@@ -23,7 +23,7 @@ const signUpSchema = yup.object({
 })
 
 export function SignUp() {
-  const { control, handleSubmit, formState: { errors } } = useForm<FormProps>({
+  const { control, handleSubmit, formState: { errors }, reset } = useForm<FormProps>({
     resolver: yupResolver(signUpSchema)
   });
   const navigation = useNavigation();
@@ -32,6 +32,7 @@ export function SignUp() {
   }
   function handleSignUp({ email, name, password, password_confirmation }: FormProps) {
     console.log({email,name,password,password_confirmation});
+    reset();
   }
 
   return (
