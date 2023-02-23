@@ -7,6 +7,8 @@ import { Button } from "../../components/Button";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 import { Container, Content, Error, Title, TopForm } from "./styles";
+import { useState } from 'react';
+import { api } from '../../services/api';
 
 type FormProps = {
   name: string;
@@ -23,16 +25,30 @@ const signUpSchema = yup.object({
 })
 
 export function SignUp() {
+  const [register, setRegister] = useState<FormProps[]>([]);
+
   const { control, handleSubmit, formState: { errors }, reset } = useForm<FormProps>({
     resolver: yupResolver(signUpSchema)
   });
   const navigation = useNavigation();
+
+  async function handleRegister(form: FormProps) {
+    try {
+      await api.post('/create-user', {
+        name: form.name,
+        email: form.email,
+        password: form.password,
+        password_confirmation: form.password_confirmation
+      })
+      reset();
+      navigation.navigate('initial');
+    } catch (error) {
+      console.log(error);      
+    }
+  }
+
   function goBack() {
     navigation.goBack();
-  }
-  function handleSignUp({ email, name, password, password_confirmation }: FormProps) {
-    console.log({email,name,password,password_confirmation});
-    reset();
   }
 
   return (
@@ -105,13 +121,13 @@ export function SignUp() {
               secureTextEntry
               onChangeText={onChange}
               value={value}
-              onSubmitEditing={handleSubmit(handleSignUp)}
+              onSubmitEditing={handleSubmit(handleRegister)}
               returnKeyType="send"
               style={{ marginBottom: 20}}
             />
           )}
         />
-        <Button onPress={handleSubmit(handleSignUp)} title="Criar e acessar"/>  
+        <Button onPress={handleSubmit(handleRegister)} title="Criar e acessar"/>  
         <View style={{marginBottom: 30}} />
         <Button onPress={goBack} title="Voltar para login" type="SECONDARY" />  
         <Title>Crie sua conta</Title>
