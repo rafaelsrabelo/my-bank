@@ -34,14 +34,7 @@ export function Actions() {
         </Title>
       </ActionButton>
 
-      <ActionButton>
-        <AreaButton>
-          <AntDesign name="setting" size={26} color="#000" />
-        </AreaButton>
-        <Title>
-          Configurações
-        </Title>
-      </ActionButton>
+
     </Container>
   )
 }

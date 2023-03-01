@@ -8,8 +8,8 @@ export const Container = styled.ScrollView`
 `
 
 export const ActionButton = styled(TouchableOpacity)`
-  align-items: center;
-  margin-right: 32px;
+  align-items: flex-start;
+  margin-right: 24px;
 `
 
 export const AreaButton = styled.View`

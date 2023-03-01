@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useFocusEffect } from '@react-navigation/native';
 import {Feather } from '@expo/vector-icons'
 import { Button, FlatList, Text, TouchableOpacity, View } from "react-native";
 import { ButtonCard, Container, Content, Date, Hidden, Label, Title, Value, ButtonEye, HeaderContent } from "./styles";
@@ -16,17 +17,20 @@ export function LastMoney() {
   const [transactions, setTransactions] = useState<TransactionProps[]>([]);
   const [showValue, setShowValue] = useState(false);
 
-  function getTransactions() {
+  async function getTransactions() {
     try {
-      api.get('/transactions').then((res) => setTransactions(res.data))
+      const response = await api.get('/transactions')
+      console.log(response.data.transctionsList)
+      setTransactions(response.data.transctionsList)
     } catch (error) {
       console.log('Ops! Ocorreu um erro!')
     }
   }
 
-  useEffect(() => {
-    getTransactions();
-  }, [])
+  useFocusEffect(useCallback(() => {
+    getTransactions()
+  }, []))
+  
   function showValueFunction() {
     setShowValue(!showValue);
   }

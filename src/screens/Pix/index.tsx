@@ -21,6 +21,7 @@ type FormProps = {
 }
 
 export function Pix() {
+  const [transactions, setTransactions] = useState<FormProps[]>([]);
   const [category, setCategory] = useState({
     id: 1,
     name: 'up'
@@ -38,17 +39,26 @@ export function Pix() {
   }
 
   async function createTransaction(form: FormProps) {
-    const data = {
-      name: form.name,
-      type: category.name,
-      amount: form.amount,
+    try {
+      const data = {
+        name: form.name,
+        type: category.name,
+        amount: form.amount,
+        created_at: new Date().toLocaleString()
+      }
+      api.post('/transactions', data);
+      reset();
+      navigation.navigate('home')
+    } catch (error) {
+      console.log(error)
     }
-    await api.post('/transactions', {
-      data,
-    }).then((response) => console.log(response)).catch((err) => console.log('deu errado' + err.message))
 
-    reset();
-    navigation.navigate('home');
+    // await api.post('/transactions', {
+    //   data,
+    // }).then((response) => console.log(form))
+
+    // reset();
+    // navigation.navigate('home');
   }
 
   useEffect(() => {

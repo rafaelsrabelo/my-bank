@@ -20,7 +20,7 @@ export const FlatListComponent = styled(FlatList)`
 `
 
 export const ButtonCard = styled(TouchableOpacity)`
-margin-bottom: 24px;
+margin-bottom: 12px;
 border-bottom-width: 0.5;
 border-bottom-color: ${({theme}) => theme.COLORS.GRAY_300};
 `
