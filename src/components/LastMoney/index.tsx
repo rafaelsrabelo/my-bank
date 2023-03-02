@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { useFocusEffect } from '@react-navigation/native';
-import {Feather } from '@expo/vector-icons'
+import { Feather } from '@expo/vector-icons'
 import { Button, FlatList, Text, TouchableOpacity, View } from "react-native";
 import { ButtonCard, Container, Content, Date, Hidden, Label, Title, Value, ButtonEye, HeaderContent } from "./styles";
 import { api } from "../../services/api";
-
+import { format, formatDistanceToNow } from 'date-fns'
+import ptBR from "date-fns/locale/pt-BR";
 interface TransactionProps {
   id: number;
   name: string;
@@ -13,15 +14,16 @@ interface TransactionProps {
   created_at: string;
 }
 
+
 export function LastMoney() {
   const [transactions, setTransactions] = useState<TransactionProps[]>([]);
   const [showValue, setShowValue] = useState(false);
-
+  
   async function getTransactions() {
     try {
       const response = await api.get('/transactions')
-      console.log(response.data.transctionsList)
       setTransactions(response.data.transctionsList)
+      console.log(response.data.transctionsList)
     } catch (error) {
       console.log('Ops! Ocorreu um erro!')
     }
@@ -38,8 +40,10 @@ export function LastMoney() {
   return (
     <Container>
       <HeaderContent>
-      <Title>Últimas movimentações</Title>
-        <ButtonEye style={{ opacity: 0.9 }} onPress={showValueFunction}>
+        <Title>Últimas movimentações</Title>
+        {
+          transactions ? 
+          <ButtonEye style={{ opacity: 0.9 }} onPress={showValueFunction}>
           {
             showValue ?
               <Feather
@@ -53,7 +57,9 @@ export function LastMoney() {
               />
           }
 
-        </ButtonEye>
+        </ButtonEye> : <View />
+        }
+
       </HeaderContent>
 
       <FlatList
@@ -62,7 +68,9 @@ export function LastMoney() {
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) =>
         <ButtonCard>
-            <Date>{item.created_at}</Date>
+            <Date>
+              {item.created_at}
+            </Date>
             
             <Content>
               <Label>{item.name}</Label>

@@ -12,6 +12,8 @@ import axios from "axios";
 import { api } from "../../services/api";
 import { Select } from "../../components/Select";
 import { TypeSelect } from "../TypeSelect";
+import { format, formatDistanceToNow } from 'date-fns'
+import ptBR from "date-fns/locale/pt-BR";
 
 type FormProps = {
   name: string;
@@ -24,7 +26,7 @@ export function Pix() {
   const [transactions, setTransactions] = useState<FormProps[]>([]);
   const [category, setCategory] = useState({
     id: 1,
-    name: 'up'
+    name: 'up',
   });
   const { control, handleSubmit, reset, formState: { errors } } = useForm<FormProps>();
   const [categoryModal, setCategoryModal] = useState(false);
@@ -39,12 +41,12 @@ export function Pix() {
   }
 
   async function createTransaction(form: FormProps) {
-    try {
+      try {
       const data = {
         name: form.name,
         type: category.name,
         amount: form.amount,
-        created_at: new Date().toLocaleString()
+        created_at: format(new Date(), 'dd/mm/yyyy'),
       }
       api.post('/transactions', data);
       reset();
@@ -52,13 +54,6 @@ export function Pix() {
     } catch (error) {
       console.log(error)
     }
-
-    // await api.post('/transactions', {
-    //   data,
-    // }).then((response) => console.log(form))
-
-    // reset();
-    // navigation.navigate('home');
   }
 
   useEffect(() => {
