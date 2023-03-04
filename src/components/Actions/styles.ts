@@ -4,6 +4,7 @@ import { TouchableOpacity } from "react-native";
 export const Container = styled.ScrollView`
   padding: 0 20px;
   max-height: 84px;
+  margin-top: 50px;
   margin-bottom: 50px;
 `
 

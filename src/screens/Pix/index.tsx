@@ -14,20 +14,18 @@ import { Select } from "../../components/Select";
 import { TypeSelect } from "../TypeSelect";
 import { format, formatDistanceToNow } from 'date-fns'
 import ptBR from "date-fns/locale/pt-BR";
+import { dateFormatter } from "../../utils/formatter";
 
 type FormProps = {
   name: string;
-  amount: string;
+  amount: number;
   created_at: string;
   transactionType: string;
 }
 
 export function Pix() {
   const [transactions, setTransactions] = useState<FormProps[]>([]);
-  const [category, setCategory] = useState({
-    id: 1,
-    name: 'up',
-  });
+  const [category, setCategory] = useState({});
   const { control, handleSubmit, reset, formState: { errors } } = useForm<FormProps>();
   const [categoryModal, setCategoryModal] = useState(false);
   const navigation = useNavigation();
@@ -46,7 +44,7 @@ export function Pix() {
         name: form.name,
         type: category.name,
         amount: form.amount,
-        created_at: format(new Date(), 'dd/mm/yyyy'),
+        created_at: dateFormatter.format((new Date())),
       }
       api.post('/transactions', data);
       reset();

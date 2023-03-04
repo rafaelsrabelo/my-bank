@@ -127,7 +127,7 @@ export function SignUp() {
             />
           )}
         />
-        <Button onPress={handleSubmit(handleRegister)} title="Criar e acessar"/>  
+        <Button onPress={handleSubmit(handleRegister)} title="Criar conta"/>  
         <View style={{marginBottom: 30}} />
         <Button onPress={goBack} title="Voltar para login" type="SECONDARY" />  
         <Title>Crie sua conta</Title>

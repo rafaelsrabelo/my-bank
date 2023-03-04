@@ -1,19 +1,36 @@
-import { Text } from "react-native";
+import { useContext } from "react";
+import { Alert, Text, FlatList, View } from "react-native";
+import { TransactionContext } from "../../contexts/TransactionContext";
+import { priceFOrmatter } from "../../utils/formatter";
+
 import { Container, Content, Description, Item, Title, Balance, Expenses } from "./styles";
 
-type Props = {
-  balance: string;
-  expenses?: string;
-}
-
-export function Amount({balance, expenses }: Props ) {
+export function Amount() {
+  const { transactions } = useContext(TransactionContext)
+  const summary = transactions.reduce(
+    (acc, transaction) => {
+      if (transaction.type === 'up') {
+        acc.up += transaction.amount;
+        acc.total += transaction.amount;
+      } else {
+        acc.down = + transaction.amount;
+        acc.total -= transaction.amount;
+      }
+      
+      return acc;
+    },
+    {
+      up: 0,
+      down: 0,
+      total: 0
+    });
   return (
     <Container>
       <Item>
         <Title>Saldo</Title>
         <Content>
-          <Description>R$</Description>
-          <Balance>{ balance }</Balance>
+          <Description>{ priceFOrmatter.format(summary.total)}</Description>
+          <Balance></Balance>
         </Content>
       </Item>
 

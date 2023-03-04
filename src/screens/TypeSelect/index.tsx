@@ -54,6 +54,7 @@ export function TypeSelect({
             >
               <Feather name='dollar-sign' style={{ marginRight: 12}} />
               <Name>{ item.name }</Name>
+              
             </Category>
           )}
         />

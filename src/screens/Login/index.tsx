@@ -39,8 +39,8 @@ export function Login() {
     <Container>
       <Header />
       <HightLight>
-        <Title>Bem vindo ao MyBank!</Title>
-        <Subtitle>Acesse sua conta e tenha controle da sua vida financeira na palma da sua mão!</Subtitle>
+        <Title>Controle suas transações</Title>
+        <Subtitle>Acesse sua conta e tenha o controle da sua vida financeira</Subtitle>
         <Controller
           control={control}
           name="email"

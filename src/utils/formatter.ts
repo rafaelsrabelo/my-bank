@@ -1,6 +1,9 @@
-import { parseISO, isAfter } from 'date-fns';
+import 'intl';
+import 'intl/locale-data/jsonp/en'; // or any other locale you need
 
-const date = '2018-04-01 18:00:00';
-const parsedDate = parseISO(date);
+export const dateFormatter = new Intl.DateTimeFormat('pt-BR', {});
 
-export const past = isAfter(parsedDate, new Date()); // true
+export const priceFOrmatter = new Intl.NumberFormat('pt-BR', {
+  style: 'currency',
+  currency: 'BRL'
+})

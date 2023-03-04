@@ -1,38 +1,30 @@
-import { useCallback, useEffect, useState } from "react";
-import { useFocusEffect } from '@react-navigation/native';
+import { useState, useContext } from "react";
 import { Feather } from '@expo/vector-icons'
-import { Button, FlatList, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import { ButtonCard, Container, Content, Date, Hidden, Label, Title, Value, ButtonEye, HeaderContent } from "./styles";
-import { api } from "../../services/api";
-import { format, formatDistanceToNow } from 'date-fns'
-import ptBR from "date-fns/locale/pt-BR";
-interface TransactionProps {
-  id: number;
-  name: string;
-  amount: string;
-  type: string;
-  created_at: string;
-}
-
+import { TransactionContext } from "../../contexts/TransactionContext";
+import { priceFOrmatter } from "../../utils/formatter";
 
 export function LastMoney() {
-  const [transactions, setTransactions] = useState<TransactionProps[]>([]);
+  const { transactions } = useContext(TransactionContext)
   const [showValue, setShowValue] = useState(false);
-  
-  async function getTransactions() {
-    try {
-      const response = await api.get('/transactions')
-      setTransactions(response.data.transctionsList)
-      console.log(response.data.transctionsList)
-    } catch (error) {
-      console.log('Ops! Ocorreu um erro!')
-    }
-  }
-
-  useFocusEffect(useCallback(() => {
-    getTransactions()
-  }, []))
-  
+  const summary = transactions.reduce(
+    (acc, transaction) => {
+      if (transaction.type === 'up') {
+        acc.up += transaction.amount;
+        acc.total += transaction.amount;
+      } else {
+        acc.down = + transaction.amount;
+        acc.total -= transaction.amount;
+      }
+      
+      return acc;
+    },
+    {
+      up: 0,
+      down: 0,
+      total: 0
+    });
   function showValueFunction() {
     setShowValue(!showValue);
   }
@@ -69,14 +61,13 @@ export function LastMoney() {
         renderItem={({ item }) =>
         <ButtonCard>
             <Date>
-              {item.created_at}
+              { item.created_at}
             </Date>
-            
             <Content>
               <Label>{item.name}</Label>
             {
                 showValue ? (
-                  <Value  type={item.type}>{item.type === 'up' ? `R$ ${item.amount}` : `R$ - ${item.amount}`}</Value>
+                  <Value  type={item.type}>{item.type === 'up' ? `${ priceFOrmatter.format(item.amount)}` : `${ priceFOrmatter.format(item.amount)}`}</Value>
                 ) : (
                     <Hidden></Hidden>
               )

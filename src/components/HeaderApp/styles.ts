@@ -3,26 +3,31 @@ import styled from "styled-components/native";
 
 export const Container = styled.View`
   background-color: ${({ theme }) => theme.COLORS.PURPLE};
-  height: 172px;
+  /* height: 100px; */
   width: 100%;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 20px;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  padding: 50px 20px;
+`
+
+export const Hello = styled.Text`
+  color: ${({ theme }) => theme.COLORS.WHITE};
+  font-size: ${({ theme }) => theme.FONT_SIZE.SM}px;
+  text-align: left;
+  font-family: ${({theme}) => theme.FONT_FAMILY.BOLD};
 `
 
 export const Message = styled.Text`
   color: ${({ theme }) => theme.COLORS.WHITE};
   font-size: ${({ theme }) => theme.FONT_SIZE.XL}px;
-  text-align: center;
+  text-align: left;
   font-family: ${({theme}) => theme.FONT_FAMILY.BOLD};
 `
 
 export const ButtonEye = styled(TouchableOpacity)`
-  width: 44;
-  height: 44;
+  width: 36;
+  height: 36;
   background-color: rgba(255,255,255,0.5);
   justify-content: center;
   align-items: center;
