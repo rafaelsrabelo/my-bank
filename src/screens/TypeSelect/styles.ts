@@ -37,6 +37,18 @@ export const Name = styled.Text`
     font-size: ${({ theme }) => theme.FONT_SIZE.SM}px;
 `
 
+export const Deposit = styled.Text`
+    font-size: ${({ theme }) => theme.FONT_SIZE.MD}px;
+    color: ${({ theme }) => theme.COLORS.GREEN_700}; 
+    font-weight: bolder;
+`
+
+export const Exit = styled.Text`
+    font-size: ${({ theme }) => theme.FONT_SIZE.MD}px;
+    color: ${({ theme }) => theme.COLORS.RED_500}; 
+    font-weight: bolder;
+`
+
 export const Separetor = styled.View`
   height: 1px;
   width: 100%;

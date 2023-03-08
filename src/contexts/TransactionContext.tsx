@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useCallback, useState } from "react";
 import { useFocusEffect } from '@react-navigation/native';
 import { api } from "../services/api";
+import { useAuth } from "../hooks/useAuth";
 
 interface TransactionProps {
   id: string;
@@ -22,19 +23,20 @@ export const TransactionContext = createContext({} as TransactionsContextyType)
 
 export function TransactoinsProvider({ children }: TransactoinsProviderProps) {
   const [transactions, setTransactions] = useState<TransactionProps[]>([]);
-  
-  async function getTransactions() {
+  const { user } = useAuth();
+  async function getTransactions(query?: string) {
     try {
-      const response = await api.get('/transactions')
-      setTransactions(response.data.transctionsList)
+      const response = await api.get(`/users/${user._id}/transactions`)
+      setTransactions(response.data.transactions)
     } catch (error) {
-      console.log('Ops! Ocorreu um erro!')
+      console.log(error)
+      console.log("OCORREU UM ERRO")
     }
   }
 
   useFocusEffect(useCallback(() => {
     getTransactions()
-  }, []))
+  }, [transactions]))
 
   return (
     <TransactionContext.Provider value={{ transactions }}>

@@ -56,7 +56,7 @@ export function LastMoney() {
 
       <FlatList
         data={transactions}
-        keyExtractor={(item) => String(item.id)}
+        keyExtractor={(item) => String(item._id)}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) =>
         <ButtonCard>

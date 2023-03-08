@@ -46,7 +46,8 @@ export function Pix() {
         amount: form.amount,
         created_at: dateFormatter.format((new Date())),
       }
-      api.post('/transactions', data);
+        api.post('/transactions', data);
+        console.log(`${data} AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`)
       reset();
       navigation.navigate('home')
     } catch (error) {

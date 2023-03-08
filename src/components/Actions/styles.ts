@@ -9,15 +9,16 @@ export const Container = styled.ScrollView`
 `
 
 export const ActionButton = styled(TouchableOpacity)`
-  align-items: flex-start;
+  align-items: center;
   margin-right: 24px;
 `
 
 export const AreaButton = styled.View`
   background-color: ${({ theme }) => theme.COLORS.GRAY_100};
-  height: 60px;
-  width: 60px;
-  border-radius: 30px;
+  /* height: 60px; */
+  /* width: 60px; */
+  padding: 18px 32px;
+  border-radius: 10px;
   justify-content: center;
   align-items: center;
 `

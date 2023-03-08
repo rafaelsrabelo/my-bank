@@ -57,7 +57,7 @@ export function SignUp() {
       <TopForm>
       <Title>Crie sua conta</Title>
       </TopForm>
-      {
+      {/* {
         errors.name || errors.email || errors.password || errors.password_confirmation ?
         <TopForm>
         <Error>{errors.name?.message }</Error>
@@ -65,7 +65,7 @@ export function SignUp() {
         <Error>{errors.password?.message }</Error>
         <Error>{errors.password_confirmation?.message }</Error>
       </TopForm> : <View></View>
-      }
+      } */}
 
       <Content>
         <Controller
