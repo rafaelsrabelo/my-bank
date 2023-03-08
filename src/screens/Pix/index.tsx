@@ -47,7 +47,6 @@ export function Pix() {
         created_at: dateFormatter.format((new Date())),
       }
         api.post('/transactions', data);
-        console.log(`${data} AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`)
       reset();
       navigation.navigate('home')
     } catch (error) {

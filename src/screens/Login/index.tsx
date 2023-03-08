@@ -25,7 +25,6 @@ export function Login() {
   
   async function handleLogin({ email, password }: FormData) {
     try {
-      console.log('passou')
       setIsLoading(true);
       await login(email, password);
       reset()
