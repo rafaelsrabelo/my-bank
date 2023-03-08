@@ -30,7 +30,6 @@ export function TransactoinsProvider({ children }: TransactoinsProviderProps) {
       setTransactions(response.data.transactions)
     } catch (error) {
       console.log(error)
-      console.log("OCORREU UM ERRO")
     }
   }
 
