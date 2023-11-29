@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Button } from "../../components/Button";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
-import { Container, Title, HightLight , Subtitle} from "./styles";
+import { Container, Title, HightLight, Subtitle } from "./styles";
 import { useAuth } from "../../hooks/useAuth";
 import { api } from "../../services/api";
 import { useEffect, useState } from "react";
@@ -18,11 +18,15 @@ export function Login() {
   const navigation = useNavigation();
   const { control, reset, handleSubmit, formState: { errors } } = useForm<FormData>()
   const [isLoading, setIsLoading] = useState(false);
-  
+
   function newAccount() {
     navigation.navigate('signup')
   }
-  
+
+  function handleBack() {
+    navigation.goBack();
+  }
+
   async function handleLogin({ email, password }: FormData) {
     try {
       setIsLoading(true);
@@ -45,10 +49,10 @@ export function Login() {
           name="email"
           rules={{ required: 'Informe o e-mail' }}
           render={({ field: { onChange } }) => (
-            <Input style={{ marginTop: 50, marginBottom: 20 }} onChangeText={onChange} autoCapitalize="none" placeholder="Email" keyboardType="email-address"/>
+            <Input style={{ marginTop: 50, marginBottom: 20 }} onChangeText={onChange} autoCapitalize="none" placeholder="Email" keyboardType="email-address" />
           )}
         />
-                <Controller
+        <Controller
           control={control}
           name="password"
           rules={{ required: 'Informe a senha' }}
@@ -59,10 +63,11 @@ export function Login() {
         <Button
           title="Acessar"
           onPress={handleSubmit(handleLogin)}
-            
+
         />
-        <Subtitle style={{ marginTop: 50, marginBottom: 20}}>Ainda não tem conta?</Subtitle>
+        <Subtitle style={{ marginTop: "auto", marginBottom: 20 }}>Ainda não tem conta?</Subtitle>
         <Button onPress={newAccount} title="Criar conta" type="SECONDARY" />
+        <Button onPress={handleBack} style={{ marginTop: 10 }} title="Voltar" type="PRIMARY" />
       </HightLight>
     </Container>
   )

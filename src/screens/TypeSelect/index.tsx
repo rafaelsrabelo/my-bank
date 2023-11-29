@@ -64,7 +64,7 @@ export function TypeSelect({
             </Category>
           )}
         />
-        <View style={{ marginTop: '100%'}}>
+        <View style={{ marginTop: 40}}>
           <Button title="Selecionar" onPress={closedSelectType} />
         </View>
         

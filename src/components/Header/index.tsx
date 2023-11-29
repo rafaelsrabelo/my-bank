@@ -5,7 +5,7 @@ import { Container, Logo } from "./styles";
 export function Header() {
   return (
     <Container>
-      <Logo source={logoImg} />
+      {/* <Logo source={logoImg} /> */}
     </Container>
   )
 }

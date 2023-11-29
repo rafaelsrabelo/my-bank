@@ -18,10 +18,10 @@ type FormProps = {
 }
 
 const signUpSchema = yup.object({
-  name: yup.string().required('Campos obrigatório'),
-  email: yup.string().required('Campos obrigatório').email('E-mail inválido'),
-  password: yup.string().required('Campos obrigatório').min(6, 'A senha deve ter pelo menos 6 dígitos'),
-  password_confirmation: yup.string().required('Campos obrigatório').oneOf([yup.ref('password'), ''], 'A confirmação da senha não confere')
+  name: yup.string().required('Nome é obrigatório'),
+  email: yup.string().required('Email é obrigatório').email('E-mail inválido'),
+  password: yup.string().required('Senha é obrigatória').min(6, 'A senha deve ter pelo menos 6 dígitos'),
+  password_confirmation: yup.string().required('Confirmar senha um campo obrigatório').oneOf([yup.ref('password'), ''], 'A confirmação da senha não confere')
 })
 
 export function SignUp() {
@@ -55,7 +55,7 @@ export function SignUp() {
       <TopForm>
       <Title>Crie sua conta</Title>
       </TopForm>
-      {/* {
+      {
         errors.name || errors.email || errors.password || errors.password_confirmation ?
         <TopForm>
         <Error>{errors.name?.message }</Error>
@@ -63,7 +63,7 @@ export function SignUp() {
         <Error>{errors.password?.message }</Error>
         <Error>{errors.password_confirmation?.message }</Error>
       </TopForm> : <View></View>
-      } */}
+      }
 
       <Content>
         <Controller
@@ -128,8 +128,6 @@ export function SignUp() {
         <Button onPress={handleSubmit(handleRegister)} title="Criar conta"/>  
         <View style={{marginBottom: 30}} />
         <Button onPress={goBack} title="Voltar para login" type="SECONDARY" />  
-        <Title>Crie sua conta</Title>
-
       </Content>
     </Container>
   )

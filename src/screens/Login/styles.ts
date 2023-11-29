@@ -11,18 +11,18 @@ export const Title = styled.Text`
   color: ${({ theme }) => theme.COLORS.PURPLE_DARK};
   font-size: ${({ theme }) => theme.FONT_SIZE.XL}px;
   text-align: center;
-  font-family: ${({theme}) => theme.FONT_FAMILY.BOLD};
+  font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
 `
 
 export const Subtitle = styled.Text`
   color: ${({ theme }) => theme.COLORS.PURPLE_DARK};
   font-size: ${({ theme }) => theme.FONT_SIZE.MD}px;
   text-align: center;
-  font-family: ${({theme}) => theme.FONT_FAMILY.REGULAR};
+  font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
 `
 
 export const HightLight = styled.View`
-  padding: 0 20px;
+  padding:  20px;
   flex: 1;
   width: 100%;
   background-color: ${({ theme }) => theme.COLORS.WHITE};

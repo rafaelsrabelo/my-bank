@@ -5,8 +5,8 @@ export default {
     GREEN_700: '#00875F',
     GREEN_500: '#00B37E',
 
-    PURPLE: '#771AC9',
-    PURPLE_DARK: '#612f71',
+    PURPLE: '#6C63FF',
+    PURPLE_DARK: '#4C43D6',
 
     GRAY_700: '#121214',
     GRAY_600: '#202024',
@@ -26,6 +26,6 @@ export default {
     SM: 14,
     MD: 16,
     LG: 18,
-    XL: 24
+    XL: 22
   }
 };

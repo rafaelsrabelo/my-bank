@@ -7,7 +7,7 @@ export const Content = styled.View`
   align-items: center;
   background-color: ${({ theme }) => theme.COLORS.WHITE};
   flex: 1;
-  padding: 0 20px;
+  padding: 20px;
 `
 
 export const TopForm = styled.View`
