@@ -28,7 +28,7 @@ export function AuthContexProvider({ children }: AuthContextProviderProps) {
       const { data } = await api.post('/auth/signin', { email, password });
       if (data.token) {
         const token = data.token;
-        const decodedUser = jwtDecode<UserDTO>(data.token);
+        const decodedUser = jwtDecode<UserDTO>(token);
         console.log('---------------------');
         console.log(decodedUser);
         setUser(decodedUser);
