@@ -3,6 +3,9 @@ import { storageUserSave, storageUserGet, storageUserRemove } from "../storage/s
 import { UserDTO } from "../dtos/UserDTO";
 import { api } from "../services/api";
 import { removeToken, storageAuthToken, storageAuthTokenGet } from "../storage/storageAuthToken";
+import { jwtDecode } from "jwt-decode";
+
+
 export type AuthContextDataProps = {
   user: UserDTO;
   login: (email: string, password: string) => Promise<void>;
@@ -22,10 +25,14 @@ export function AuthContexProvider({ children }: AuthContextProviderProps) {
 
   async function login(email: string, password: string) { 
     try {
-      const { data } = await api.post('/login', { email, password });
-      if (data.user && data.token) {
-        setUser(data.user);
-        storageUserSave(data.user);
+      const { data } = await api.post('/auth/signin', { email, password });
+      if (data.token) {
+        const token = data.token;
+        const decodedUser = jwtDecode<UserDTO>(data.token);
+        console.log('---------------------');
+        console.log(decodedUser);
+        setUser(decodedUser);
+        storageUserSave(decodedUser);
         storageAuthToken(data.token);
         api.defaults.headers.common['Authorization'] = 'Bearer ' + data.token;
       }

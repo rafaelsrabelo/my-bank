@@ -34,14 +34,12 @@ export function SignUp() {
 
   async function handleRegister(form: FormProps) {
     try {
-      await api.post('/create-user', {
+      await api.post('/users', {
         name: form.name,
         email: form.email,
         password: form.password,
-        password_confirmation: form.password_confirmation
       })
       reset();
-      navigation.navigate('initial');
     } catch (error) {
       console.log(error);      
     }

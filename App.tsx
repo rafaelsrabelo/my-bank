@@ -6,6 +6,8 @@ import { Loading } from './src/components/Loading';
 import { Routes } from './src/routes';
 import { TypeSelect } from './src/screens/TypeSelect';
 import { AuthContexProvider } from './src/contexts/AuthContext';
+import { decode as atob } from 'base-64';
+global.atob = atob;
 
 export default function App() {
   const [fontsLoaded] = useFonts({Roboto_400Regular, Roboto_700Bold})
